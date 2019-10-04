@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+  * @copyright     Copyright © Leviathan Studios, Licensed under MIT
+  * @author        Grey Crane <gmc31886@gmail.com>
+  */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <leviathan_request>
+            <general>
+                <enabled>1</enabled>
+                <email>licursicreations@gmail.com</email>
+                <email_name>Justin Licursi</email_name>
+                <allowed_states>oh</allowed_states>
+                <min_age>18</min_age>
+                <age_check>1</age_check>
+                <title>Your Custom Furniture Awaits</title>
+            </general>
+        </leviathan_request>
+    </default>
+</config>

@@ -1,0 +1,179 @@
+/**
+ * @copyright   Copyright © Leviathan Studios, Licensed under MIT
+ * @author      Grey Crane <gmc31886@gmail.com>
+ */
+
+//
+//  Imports
+//  _____________________________________________
+
+@import '_mixin';
+@import '_variables';
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .form-wrapper {
+        .lib-vendor-prefix-display();
+        .lib-vendor-prefix-flex-direction();
+        .flex-justify-content();
+
+        .title-wrapper {
+            h2 {
+                font-weight: bold;
+                text-align: center;
+            }
+        }
+
+        #request-contact-form {
+            .lib-vendor-prefix-flex-direction();
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 1px 6px 1px darkgrey;
+            border-radius: 20px;
+            padding: 20px;
+
+            .row:not(.image-uploader) {
+                position: relative;
+                overflow: hidden;
+                margin-bottom: 10px;
+
+                input, textarea, select {
+                    border-radius: 5px;
+                }
+
+                input, select {
+                    height: 50px;
+                }
+
+                input, textarea {
+                    width: 100%;
+                    border: 2px solid @ls__form-primary-outline-color;
+                    background: none;
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    z-index: 1;
+                    outline: 0;
+                    padding: 12px 12px 12px 12px;
+
+                    &:valid {
+                        background: white;
+                    }
+
+                    &:focus {
+                        border-color: @ls__form-primary-outline-highlight;
+                        padding: 4px 6px 20px 6px;
+                    }
+
+                    &:focus + label {
+                        background: @ls__form-primary-outline-highlight;
+                        color: white;
+                        font-size: 70%;
+                        z-index: 2;
+                        text-transform: uppercase;
+                        top: 100%;
+                        padding: 4px 10px;
+                        margin-top: -23px;
+                    }
+                }
+
+                label {
+                    transition:
+                            background 0.2s,
+                            color 0.2s,
+                            top 0.2s,
+                            bottom 0.2s,
+                            right 0.2s,
+                            left 0.2s;
+                    position: absolute;
+                    color: #999;
+                    padding: 7px 6px;
+                    top: 7px;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
+                textarea {
+                    display: block;
+                    resize: vertical;
+                }
+
+                &.select {
+                    label {
+                        display: none;
+                    }
+                }
+            }
+
+            .action-row {
+                margin-top: 15px;
+
+                button {
+                    border-radius: 0;
+                    background: darkblue;
+                    padding: 5px 15px;
+                    text-align: center;
+                    color: white;
+                    border: none;
+                    position: relative;
+                    -ms-transform: skewX(-20deg);
+                    -webkit-transform: skewX(-20deg);
+                    transform: skewX(-20deg);
+                    left: 7px;
+
+                    > span {
+                        -ms-transform: skewX(20deg);
+                        -webkit-transform: skewX(20deg);
+                        transform: skewX(20deg);
+                        display: inline-block;
+                        font-size: 18px;
+                    }
+
+                    &:before {
+                        content: "";
+                        background: darkblue;
+                        height: 100%;
+                        position: absolute;
+                        box-sizing: border-box;
+                        display: inline-block;
+                        padding: 10px 10px;
+                        left: -7px;
+                        top: 0;
+                        -ms-transform: skewX(20deg);
+                        -webkit-transform: skewX(20deg);
+                        transform: skewX(20deg);
+                    }
+
+                    &:after {
+                        background: darkblue;
+                        content: "";
+                        height: 100%;
+                        position: absolute;
+                        box-sizing: border-box;
+                        display: inline-block;
+                        padding: 10px 2px;
+                        right: -8px;
+                        top: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Small Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .form-wrapper #request-contact-form {
+        width: 90%;
+    }
+}
+

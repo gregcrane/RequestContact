@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+  * @copyright     Copyright © Leviathan Studios, Licensed under MIT
+  * @author        Grey Crane <gmc31886@gmail.com>
+  */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">estimate_request_form.estimate_request_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Estimate Request</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="save" class="LeviathanStudios\RequestContact\Ui\Component\Buttons\SaveButton"/>
+            <button name="save_and_continue" class="LeviathanStudios\RequestContact\Ui\Component\Buttons\SaveAndContinueButton"/>
+            <button name="delete" class="LeviathanStudios\RequestContact\Ui\Component\Buttons\DeleteButton"/>
+            <button name="back" class="LeviathanStudios\RequestContact\Ui\Component\Buttons\BackButton"/>
+            <button name="reset" class="LeviathanStudios\RequestContact\Ui\Component\Buttons\ResetButton"/>
+            <button name="review" class="LeviathanStudios\RequestContact\Ui\Component\Buttons\ReviewButton"/>
+        </buttons>
+        <namespace>estimate_request_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>estimate_request_form.estimate_request_form_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="estimate_request_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="contact/estimate/save"/>
+        </settings>
+        <aclResource>LeviathanStudios_RequestContact::estimate</aclResource>
+        <dataProvider class="LeviathanStudios\RequestContact\Ui\Component\DataSource\Estimate\Form\DataProvider"
+                      name="estimate_request_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="estimate">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="is_collection" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <settings>
+            <label>Estimate Fields</label>
+            <dataScope/>
+        </settings>
+
+        <field name="entity_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+
+        <field name="customer_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+
+        <field name="status"  sortOrder="20" formElement="select">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Status</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="LeviathanStudios\RequestContact\Model\Config\Source\EstimateStatus"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="email" sortOrder="30" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <label translate="true">Email</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="first_name" sortOrder="40" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <label translate="true">First Name</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="last_name" sortOrder="50" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <label translate="true">Last Name</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="request" sortOrder="60" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Request</label>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="address" sortOrder="70" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Address</label>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="city" sortOrder="80" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">City</label>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="state"  sortOrder="90" formElement="select">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">State</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="LeviathanStudios\RequestContact\Model\Config\Source\States"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="zip" sortOrder="100" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <label translate="true">Zip/Postal Code</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="telephone" sortOrder="110" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <label translate="true">Phone Number</label>
+            </settings>
+        </field>
+
+        <field name="referred" sortOrder="120" formElement="select">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Referred</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="LeviathanStudios\RequestContact\Model\Config\Source\Referred"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <!--todo enable multiple images (without the repeating the complexity of the product gallery-->
+        <field name="images" sortOrder="130" formElement="imageUploader">
+            <settings>
+                <label translate="true">Images</label>
+                <componentType>imageUploader</componentType>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <isMultipleFiles>true</isMultipleFiles>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">contact/estimate/upload</param>
+                        </uploaderConfig>
+                        <initialMediaGalleryOpenSubpath>estimate/request</initialMediaGalleryOpenSubpath>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

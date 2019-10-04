@@ -1,0 +1,97 @@
+<?php
+/**
+ * @copyright   Copyright © Leviathan Studios, Licensed under MIT
+ * @author      Grey Crane <gmc31886@gmail.com>
+ */
+declare(strict_types=1);
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \LeviathanStudios\RequestContact\ViewModel\Frontend\RequestForm $reviewViewModel */
+?>
+<?php if ($reviewViewModel = $block->getRequestVm()) : ?>
+    <div class="form-wrapper">
+        <div class="title-wrapper">
+            <h2><?= $reviewViewModel->getTitle() ?></h2>
+        </div>
+        <form action="<?= $reviewViewModel->getFormAction() ?>"
+              method="post"
+              id="request-contact-form">
+            <?php if ($reviewViewModel->isAgeCheckAllowed()) : ?>
+                <div class="row">
+                    <label for="input-age" ><?= __('Over 18') ?></label>
+                    <input id="input-age" type="checkbox"
+                           name="age"
+                           data-validate='{"validate-minimum-age":<?= $reviewViewModel->getMinAge() ?>}'/>
+                </div>
+            <?php endif ?>
+            <div class="row full">
+                <input id="input-email" type="email" name="email" required/>
+                <label for="input-email" class="floating-label"><?= __('Email') ?></label>
+            </div>
+            <div class="row half">
+                <input id="input-first-name" type="text" name="first_name" required/>
+                <label for="input-first-name" class="floating-label"><?= __('First Name') ?></label>
+            </div>
+            <div class="row half">
+                <input id="input-last-name" type="text" name="last_name" required/>
+                <label for="input-last-name" class="floating-label"><?= __('Last Name') ?></label>
+            </div>
+            <div class="row full">
+                <textarea id="input-request" name="request" rows="5" required></textarea>
+                <label for="input-request" class="floating-label"><?= __('Request') ?></label>
+            </div>
+            <div class="row full">
+                <input id="input-address" type="text" name="address" required/>
+                <label for="input-address" class="floating-label"><?= __('Address') ?></label>
+            </div>
+            <div class="row triple">
+                <input id="input-city" type="text" name="city" required/>
+                <label for="input-city" class="floating-label"><?= __('City') ?></label>
+            </div>
+            <div class="row triple select">
+                <select id="input-city" name="state" required>
+                    <option value="" disabled selected>Select a State..</option>
+                    <?php foreach ($reviewViewModel->getStateOptions() as $stateOption) : ?>
+                        <option value="<?= $stateOption['value'] ?>"><?= $stateOption['label'] ?></option>
+                    <?php endforeach ?>
+                </select>
+                <label for="input-request" class="floating-label"><?= __('State') ?></label>
+            </div>
+            <div class="row triple">
+                <input id="input-zip" type="text" name="zip" required/>
+                <label for="input-zip" class="floating-label"><?= __('Zip') ?></label>
+            </div>
+            <div class="row full">
+                <input id="input-phone" type="text" name="telephone" required/>
+                <label for="input-phone" class="floating-label"><?= __('Phone Number') ?></label>
+            </div>
+            <div class="row full select">
+                <select id="input-referred" name="referred" required>
+                    <option value="" disabled selected>Select how referred..</option>
+                    <?php foreach ($reviewViewModel->getReferredOptions() as $referredOption) : ?>
+                        <option value="<?= $referredOption['value'] ?>"><?= $referredOption['label'] ?></option>
+                    <?php endforeach ?>
+                </select>
+                <label for="input-referred" class="floating-label"><?= __('How Referred') ?></label>
+            </div>
+            <div class="row full image-uploader">
+                <label for="my_customer_image" class="label"><span><?= __('Images') ?></span></label>
+                <div class="control">
+                    <input type="file"
+                           name="images[]"
+                           id="customer_image_uploader"
+                           title="<?= __('Customer Images') ?>"
+                           class="input-text"
+                           data-validate="{required:false}"
+                           accept="image/*"
+                           multiple="multiple">
+                </div>
+            </div>
+            <div class="action-row">
+                <button type="submit" form="request-contact-form" value="Submit" title="<?= __('Submit') ?>">
+                    <span class="text"><?= __('Submit Request') ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+<?php endif;

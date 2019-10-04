@@ -1,0 +1,27 @@
+{
+    "leviathan_contacts": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "status": true,
+            "email": true,
+            "first_name": true,
+            "last_name": true,
+            "request": true,
+            "address": true,
+            "city": true,
+            "state": true,
+            "zip": true,
+            "referred": true,
+            "created_at": true,
+            "updated_at": true,
+            "telephone": true,
+            "images": true,
+            "image_hash": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "LEVIATHAN_CONTACTS_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        }
+    }
+}

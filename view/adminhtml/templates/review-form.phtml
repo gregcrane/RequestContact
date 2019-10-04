@@ -1,0 +1,123 @@
+<?php
+/**
+ * @copyright   Copyright © Leviathan Studios, Licensed under MIT
+ * @author      Grey Crane <gmc31886@gmail.com>
+ */
+declare(strict_types=1);
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \LeviathanStudios\RequestContact\ViewModel\Adminhtml\Review $reviewViewModel */
+$reviewViewModel = $block->getReviewVm();
+$estimate        = null;
+if ($reviewViewModel) :
+    $estimate = $reviewViewModel->getEstimate();
+endif;
+
+if ($estimate && !empty($estimate)) : ?>
+    <div class="estimate-info-container">
+        <div class="info-wrapper block-container">
+            <h2><?= __('Customer Information') ?></h2>
+            <div class="row name">
+                <div class="label"><?= __('Name') ?></div>
+                <div class="value"><?= $estimate['name']; ?></div>
+            </div>
+            <div class="row email">
+                <div class="label"><?= __('Email') ?></div>
+                <div class="value"><?= $estimate['email']; ?></div>
+            </div>
+            <div class="row address">
+                <div class="label"><?= __('Address') ?></div>
+                <div class="value"><?= $estimate['address']; ?></div>
+            </div>
+            <div class="row address">
+                <div class="label"><?= __('City') ?></div>
+                <div class="value"><?= $estimate['city']; ?></div>
+            </div>
+            <div class="row address">
+                <div class="label"><?= __('State') ?></div>
+                <div class="value"><?= $estimate['state']; ?></div>
+            </div>
+            <div class="row address">
+                <div class="label"><?= __('Zip') ?></div>
+                <div class="value"><?= $estimate['zip']; ?></div>
+            </div>
+            <div class="row">
+                <div class="label"><?= __('Created At') ?></div>
+                <div class="value"><?= $estimate['created']; ?></div>
+            </div>
+            <div class="row">
+                <div class="label"><?= __('Referred') ?></div>
+                <div class="value"><?= $estimate['referred']; ?></div>
+            </div>
+        </div>
+
+        <div class="image-gallery block-container">
+            <h2><?= __('Image Gallery') ?></h2>
+            <div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+                <div data-role="loader" class="loading-mask">
+                    <div class="loader">
+                        <img src="<?= $block->getViewFileUrl('images/loader-1.gif') ?>"
+                             alt="<?= __('Loading...') ?>">
+                    </div>
+                </div>
+            </div>
+            <script type="text/x-magento-init">
+                {
+                    "[data-gallery-role=gallery-placeholder]": {
+                        "mage/gallery/gallery": {
+                            "data": <?= $estimate['images'] ?>,
+                            "options": {
+                                "nav": "dots",
+                                "loop": "true",
+                                "keyboard":"true",
+                                "arrows": "true",
+                                "allowfullscreen": "true",
+                                "showCaption": "false",
+                                "width": "400",
+                                "thumbwidth": "150",
+                                "transitionduration": "2",
+                                "transition": "slide",
+                                "navarrows": "true",
+                                "navtype": "slides",
+                                "navdir": "horizontal"
+                            },
+                            "fullscreen": {
+                                "nav": "dots",
+                                "loop": "true",
+                                "navdir":"horizontal",
+                                "navarrows": "true",
+                                "navtype": "slides",
+                                "arrows": "true",
+                                "showCaption": "false",
+                                "transition": "slide"
+                            }
+                        }
+                    }
+                }
+
+            </script>
+        </div>
+    </div>
+
+    <div class="request-container block-container">
+        <h2><?= __('Customer Request') ?></h2>
+        <div class="info-wrapper">
+            <div class="row">
+                <div class="label"><?= __('Request') ?></div>
+                <div class="value"><?= $estimate['request']; ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container block-container">
+        <h2><?= __('Response Form') ?></h2>
+        <form id="estimate-email" action="<?= $block->getUrl($reviewViewModel->getFormAction()) ?>" method="get">
+            <label for="email-message"><?= __('Message To The Customer') ?></label>
+            <input type="hidden" name="entity_id" value="<?= $estimate['id'] ?>"/>
+            <textarea id="email-message" name="message" rows="5" placeholder="<?= __('Enter Message') ?>"></textarea>
+        </form>
+        <div class="action-row">
+            <button type="submit" form="estimate-email" value="Submit"><?= __('Send Email') ?></button>
+        </div>
+    </div>
+<?php endif ?>

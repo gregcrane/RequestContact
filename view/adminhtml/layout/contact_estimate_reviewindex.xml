@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+  * @copyright     Copyright © Leviathan Studios, Licensed under MIT
+  * @author        Grey Crane <gmc31886@gmail.com>
+  */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <update handle="editor"/>
+    <head>
+        <css src="mage/gallery/gallery.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="review.form"
+                   template="LeviathanStudios_RequestContact::review-form.phtml">
+                <arguments>
+                    <argument name="review_vm"
+                              xsi:type="object">LeviathanStudios\RequestContact\ViewModel\Adminhtml\Review</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
