@@ -1,4 +1,4 @@
-@package     Copyright © Leviathan Studios, Licensed under MIT  
+@copyright   Copyright © Leviathan Studios, Licensed under MIT  
 @author      Greg Crane <gmc31886@gmail.com>
 
 
